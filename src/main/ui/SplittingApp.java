@@ -6,9 +6,7 @@ import java.util.Scanner;
 
 public class SplittingApp {
     User user1;
-
-
-    private Scanner input;
+    private Scanner in = new Scanner(System.in);
 
     public SplittingApp() {
         runApp();
@@ -16,23 +14,22 @@ public class SplittingApp {
 
     private void runApp() {
         boolean on = true;
-        String in;
+        String value = null;
 
         runDefault();
 
         while (on) {
+
             displayMenu();
+            value = in.next();
+            value = value.toLowerCase();
 
-            in = input.next();
-            System.out.println("TEST");
-            in = in.toLowerCase();
-            if (input.equals("q")) {
+            if (value.equals("q")) {
                 on = false;
+                System.out.println("\nThank you for using this App \nGoodbye!");
             } else {
-                processInput(in);
+                processInput(value);
             }
-
-            System.out.println("\nThank you for using this App \nGoodbye!");
 
         }
 
@@ -73,7 +70,7 @@ public class SplittingApp {
         System.out.println("\td -> add an item");
         System.out.println("\te -> view all items");
         System.out.println("\tf -> Remove an item");
-        System.out.println("\tg -> Show final balance of all users");
+        System.out.println("\tg -> Show final balance owed by all users");
         System.out.println("\tq -> to quit");
 
     }
@@ -85,21 +82,22 @@ public class SplittingApp {
     private void addUser() {
         //adding username
         System.out.println("Please enter the name of user:");
-        String in = input.next();
-        User u;
-        u = new User(in);
-        u.addUserToList(u);
+        String input = in.next();
+        User u = new User(input);
+        user1.addUserToList(u);
 
     }
 
     //view users
     private void showUsers() {
         user1.getAllUsers();
-
     }
 
     //remove users
     private void removeUser() {
+        System.out.println("Which user do you want to remove? \n enter their serial number");
+        int input = in.nextInt();
+        user1.removeUserFromList(input - 1);
     }
 
     //add products

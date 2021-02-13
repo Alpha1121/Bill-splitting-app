@@ -40,6 +40,6 @@ public class User extends Users {
 
     @Override
     public String toString() {
-        return "User{" + "name='" + name + '\'' + ", balance=" + balance + '}';
+        return ("   |     " +  getName()  +   "              " + getBalance());
     }
 }
