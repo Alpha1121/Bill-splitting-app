@@ -1,8 +1,8 @@
-# My Personal Project
+# CPSC 210 project 
 
-## A subtitle
+## balance splitting app
 
-A *bulleted* list:
+:
 - item 1
 - item 2
 - item 3

@@ -1,10 +1,10 @@
 package ui;
 
-import model.Users;
+import model.User;
 
 public class Main {
     public static void main(String[] args) {
-        Users one = new Users();
+        new SplittingApp();
 
     }
 }

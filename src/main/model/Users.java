@@ -1,29 +1,22 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Users {
-    private String name;
-    private float balance;
-    private float totalBalance;
+    List<User> allUsers = new ArrayList<User>();
 
-    public void setName(String name) {
-        this.name = name;
+    public void addUserToList(User u) {
+        allUsers.add(u);
     }
 
-    public String getName() {
-        return name;
+    public void removeUserFromList(User u) {
+        if (allUsers.contains(u)) {
+            allUsers.remove(u);
+        }
     }
 
-    public void setBalance(float balance) {
-        this.balance = balance;
+    public List<User> getAllUsers() {
+        return allUsers;
     }
-
-    public float getBalance() {
-        return balance;
-    }
-
-    public float splitBalance(String n1, String n2, String n3, String n4) {
-
-        return 0;
-    }
-
 }
