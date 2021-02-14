@@ -16,8 +16,12 @@ public class Products {
         }
     }
 
-    @Override
-    public String toString() {
-        return "Products{" + "allProducts=" + allProducts + '}';
+    public void getAllProducts() {
+        System.out.println("sr. no. |     Name     |     cost     |");
+        int i = 1;
+        for (Product p : allProducts) {
+            System.out.println(" " + i + ".  " + p.toString());
+            i++;
+        }
     }
 }

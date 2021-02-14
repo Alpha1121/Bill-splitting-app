@@ -1,11 +1,13 @@
 package ui;
 
+import model.Product;
 import model.User;
 
 import java.util.Scanner;
 
 public class SplittingApp {
     User user1;
+    Product p1 = new Product();
     private Scanner in = new Scanner(System.in);
 
     public SplittingApp() {
@@ -103,7 +105,28 @@ public class SplittingApp {
     //add products
     private void addItem() {
 
-        //split between specific users
+        System.out.println("Enter the product name");
+        String itemName = in.next();
+
+
+        System.out.println("Enter the cost ");
+        float itemCost = in.nextFloat();
+
+        System.out.println("If item is split between specific people only then press 1 "
+                + "\n else press 0 to return to menu");
+        int input = in.nextInt();
+        if (input == 1) {
+            split();
+        }
+
+
+
+
+    }
+
+    //split between specific users
+    private void split() {
+        System.out.println("Enter the sr. numbers of people using this item");
     }
 
     //view products
