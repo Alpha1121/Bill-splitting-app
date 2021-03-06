@@ -1,14 +1,20 @@
 package ui;
 
 import model.Product;
+import model.ProductsList;
 import model.User;
+import model.UsersList;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class SplittingApp {
+
     User user1;
-    Product p1 = new Product();
-    private Scanner in = new Scanner(System.in);
+    UsersList usersList;
+    ProductsList productsList;
+    private static Scanner in = new Scanner(System.in);
 
     public SplittingApp() {
         runApp();
@@ -16,21 +22,21 @@ public class SplittingApp {
 
     private void runApp() {
         boolean on = true;
-        String value = null;
+        String input = null;
 
         runDefault();
 
         while (on) {
 
             displayMenu();
-            value = in.next();
-            value = value.toLowerCase();
+            input = in.next();
+            input = input.toLowerCase();
 
-            if (value.equals("q")) {
+            if (input.equals("q")) {
                 on = false;
                 System.out.println("\nThank you for using this App \nGoodbye!");
             } else {
-                processInput(value);
+                processInput(input);
             }
 
         }
@@ -38,8 +44,11 @@ public class SplittingApp {
     }
 
     private void runDefault() {
+        usersList = new UsersList();
+        productsList = new ProductsList();
+
         user1 = new User("You");
-        user1.addUserToList(user1);
+        usersList.addUserToList(user1);
     }
 
     private void processInput(String input) {
@@ -86,61 +95,100 @@ public class SplittingApp {
         System.out.println("Please enter the name of user:");
         String input = in.next();
         User u = new User(input);
-        user1.addUserToList(u);
+        usersList.addUserToList(u);
 
     }
 
     //view users
     private void showUsers() {
-        user1.getAllUsers();
+        usersList.getAllUsers();
     }
 
     //remove users
     private void removeUser() {
         System.out.println("Which user do you want to remove? \n enter their serial number");
+        showUsers();
         int input = in.nextInt();
-        user1.removeUserFromList(input - 1);
+        usersList.removeUserFromList(input - 1);
     }
 
     //add products
     private void addItem() {
+        Product p = new Product();
 
         System.out.println("Enter the product name");
         String itemName = in.next();
-
+        p.setName(itemName);
 
         System.out.println("Enter the cost ");
         float itemCost = in.nextFloat();
+        p.setCost(itemCost);
 
+        productsList.addProductToList(p);
+        
         System.out.println("If item is split between specific people only then press 1 "
-                + "\n else press 0 to return to menu");
+                + "\n else press anything else to return to menu");
         int input = in.nextInt();
         if (input == 1) {
-            split();
+            splitBetween(p);
         }
 
-
-
+        split(usersList.getSize(), p);
 
     }
 
     //split between specific users
-    private void split() {
-        System.out.println("Enter the sr. numbers of people using this item");
+    private void splitBetween(Product p) {
+        System.out.println("Enter the number of people using this item");
+        int num = in.nextInt();
+        split(num, p);
+
+
+    }
+
+    private void split(int num, Product p) {
+        List<Integer> x = new ArrayList<Integer>();
+
+        for (int i = 0; i < num; i++) {
+            System.out.println("Enter the sr. number of the person using this item");
+            showUsers();
+            int y = in.nextInt();
+            x.add(y);
+        }
+
+        float splitCost = p.getCost() / num;
+
+
+        for (int i = 0; i < x.size(); i++) {
+            User u = usersList.getUser(x.get(i));
+            u.addBalance(splitCost);
+            p.setUsers(u);
+        }
+
     }
 
     //view products
     private void showItems() {
+        productsList.getAllProducts();
+
     }
 
     //remove products
     private void removeItem() {
+        System.out.println("choose product to remove");
+        showItems();
+        int i = in.nextInt();
+        productsList.removeProductFromList(productsList.getProduct(i - 1));
+
     }
+
 
 
 
     //show total balance of all users
     private void finalBalance() {
+        System.out.println("Total cost = " + productsList.getTotalBalance());
+        showUsers();
     }
 
 }

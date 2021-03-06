@@ -1,9 +1,8 @@
 package model;
 
-public class User extends Users {
+public class User extends UsersList {
     private String name;
     private float balance;
-    private float totalBalance;
 
     public User(String name) {
         setName(name);
@@ -17,29 +16,17 @@ public class User extends Users {
         return name;
     }
 
-    public void setBalance(float balance) {
-        this.balance = balance;
+    public void addBalance(float splitBalance) {
+        this.balance += splitBalance;
     }
 
     public float getBalance() {
         return balance;
     }
 
-    public void splitBalance(User... values) {
-        int num = 0;
-        for (User s : values) {
-            num++;
-        }
-        float split = (totalBalance / num);
-
-        for (User s : values) {
-            s.balance += split;
-        }
-
-    }
 
     @Override
     public String toString() {
-        return ("   |     " +  getName()  +   "              " + getBalance());
+        return ("User {" + "name='" + name + '\'' + ", Balance Owed=" + balance + '}');
     }
 }
