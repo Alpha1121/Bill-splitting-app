@@ -43,6 +43,7 @@ public class SplittingApp {
 
     }
 
+    //EFFECT instantiates the userList and productList, also adding a default user in the usersList.
     private void runDefault() {
         usersList = new UsersList();
         productsList = new ProductsList();
@@ -51,6 +52,7 @@ public class SplittingApp {
         usersList.addUserToList(user1);
     }
 
+    //EFFECT uses the USERS input to perform appropriate functions
     private void processInput(String input) {
         if (input.equals("a")) {
             addUser();
@@ -72,7 +74,7 @@ public class SplittingApp {
     }
 
 
-
+    //EFFECT displays the main menu
     private void displayMenu() {
         System.out.println("\nHI!! what would you like to do?\n please select:");
         System.out.println("\ta -> add new user");
@@ -86,10 +88,8 @@ public class SplittingApp {
 
     }
 
-
-    ;
-
-    //add users
+    //MODIFIES this
+    //EFFECT adds users to usersList
     private void addUser() {
         //adding username
         System.out.println("Please enter the name of user:");
@@ -99,12 +99,13 @@ public class SplittingApp {
 
     }
 
-    //view users
+    //EFFECT shows all users and balance owed by them
     private void showUsers() {
-        usersList.getAllUsers();
+        System.out.println(usersList.getAllUsers());
     }
 
-    //remove users
+    //MODIFIES this
+    //EFFECT removes users from usersList
     private void removeUser() {
         System.out.println("Which user do you want to remove? \n enter their serial number");
         showUsers();
@@ -112,7 +113,8 @@ public class SplittingApp {
         usersList.removeUserFromList(input - 1);
     }
 
-    //add products
+    //MODIFIES this
+    //EFFECT adds products to productsList after taking in details about the product from the user
     private void addItem() {
         Product p = new Product();
 
@@ -121,7 +123,7 @@ public class SplittingApp {
         p.setName(itemName);
 
         System.out.println("Enter the cost ");
-        float itemCost = in.nextFloat();
+        double itemCost = in.nextDouble();
         p.setCost(itemCost);
 
         productsList.addProductToList(p);
@@ -129,15 +131,28 @@ public class SplittingApp {
         System.out.println("If item is split between specific people only then press 1 "
                 + "\n else press anything else to return to menu");
         int input = in.nextInt();
+
         if (input == 1) {
             splitBetween(p);
+        } else {
+            splitToAll(p);
         }
 
-        split(usersList.getSize(), p);
 
     }
 
-    //split between specific users
+    //MODIFIES user.balance
+    //EFFECT splits the balance of an item shared by everyone, between every person
+    private void splitToAll(Product p) {
+        double splitBalance = (p.getCost() / usersList.getSize());
+        for (int i = 0; i < usersList.getSize(); i++) {
+            User u = usersList.getUserFromList(i);
+            u.addBalance(splitBalance);
+        }
+
+    }
+
+    //EFFECT splits the cost of an item between specific users
     private void splitBetween(Product p) {
         System.out.println("Enter the number of people using this item");
         int num = in.nextInt();
@@ -146,46 +161,93 @@ public class SplittingApp {
 
     }
 
+    /*MODIFIES user.balance && product.users
+     *EFFECT :
+     *  makes a Integer List to store the serial numbers of Users entered by the USER
+     *  accordingly adds those Users(using those serial numbers) to a list
+     *  sends the list to Product.setProdUsers to set the Users using that product.
+     *
+     */
     private void split(int num, Product p) {
         List<Integer> x = new ArrayList<Integer>();
+        UsersList list = new UsersList();
 
         for (int i = 0; i < num; i++) {
             System.out.println("Enter the sr. number of the person using this item");
             showUsers();
             int y = in.nextInt();
-            x.add(y);
+            x.add(y - 1);
         }
 
-        float splitCost = p.getCost() / num;
+        double splitCost = (p.getCost() / num);
 
 
         for (int i = 0; i < x.size(); i++) {
-            User u = usersList.getUser(x.get(i));
+            User u = usersList.getUserFromList(x.get(i));
             u.addBalance(splitCost);
-            p.setUsers(u);
+            list.addUserToList(u);
         }
+        p.setProdUsers(list);
 
     }
 
-    //view products
+    //EFFECT shows all the products and their details.
     private void showItems() {
-        productsList.getAllProducts();
+
+        System.out.println(productsList.getAllProducts());
 
     }
 
-    //remove products
+    //MODIFIES this
+    //EFFECT removes products for productsList and calls deduct()
     private void removeItem() {
         System.out.println("choose product to remove");
         showItems();
         int i = in.nextInt();
-        productsList.removeProductFromList(productsList.getProduct(i - 1));
+        Product p = productsList.getProduct(i - 1);
+        productsList.removeProductFromList(p);
+        deduct(p);
+        System.out.println("Removed product:" + p.getName() + "\nShared by: " + p.getUserNames());
+
+    }
+
+    //EFFECT checks if product is being shared by some users or all
+    private void deduct(Product p) {
+
+        if (p.getProdUsers().getSize() == 0) {
+            deductFromAll(p);
+        } else {
+            deductFromSome(p);
+        }
+    }
+
+    //MODIFIES User.balance
+    //EFFECT deducts owed balance of the product only from Users sharing the specified product
+    private void deductFromSome(Product p) {
+        UsersList prodUsers = p.getProdUsers();
+        double splitBalance = (p.getCost() / prodUsers.getSize());
+
+        System.out.println("Deducted owed balance of: ");
+        for (int i = 0; i < prodUsers.getSize(); i++) {
+            prodUsers.getUserFromList(i).deductBalance(splitBalance);
+            System.out.println(i + ") " + prodUsers.getUserName(i));
+        }
+    }
+
+    //MODIFIES user.balance
+    //EFFECT deducts owed balance of the product from all users
+    private void deductFromAll(Product p) {
+        double splitBalance = (p.getCost() / usersList.getSize());
+        System.out.println("Deducting owed balance from ALL");
+        for (int i = 0; i < usersList.getSize(); i++) {
+            usersList.getUserFromList(i).deductBalance(splitBalance);
+        }
+        System.out.println("Done deducting from ALL.");
 
     }
 
 
-
-
-    //show total balance of all users
+    //EFFECT shows total balance and balance owed by all users
     private void finalBalance() {
         System.out.println("Total cost = " + productsList.getTotalBalance());
         showUsers();
