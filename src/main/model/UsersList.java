@@ -6,8 +6,9 @@ import java.util.List;
 public class UsersList {
     List<User> allUsers = new ArrayList<User>();
 
+
     public User getUser(int ind) {
-        return allUsers.get(ind - 1);
+        return allUsers.get(ind);
     }
 
     public String getUserName(int ind) {

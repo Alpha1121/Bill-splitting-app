@@ -3,8 +3,8 @@ package model;
 public class Product {
 
     String name;
-    private float cost;
-    UsersList users;
+    private double cost;
+    UsersList prodUsers = new UsersList();
 
     public Product() {
     }
@@ -21,24 +21,46 @@ public class Product {
         this.cost = cost;
     }
 
-    public float getCost() {
+    public double getCost() {
         return cost;
     }
 
-    public void setUsers(User... user) {
-        users = new UsersList();
-        for (User u : user) {
-            users.addUserToList(u);
+    public void setProdUsers(User u) {
+        prodUsers.addUserToList(u);
+    }
+
+    public UsersList getProdUsers() {
+        if (prodUsers != null) {
+            return prodUsers;
+        } else {
+            return null;
+        }
+    }
+
+    public String getUserNames() {
+        String s;
+        if (prodUsers.allUsers.size() != 0) {
+            s = "";
+            for (User u : prodUsers.allUsers) {
+                s += " \'" + u.getName() + "\' ";
+            }
+        } else {
+            s = " All Users";
         }
 
+        return s;
     }
+
+
 
     @Override
     public String toString() {
-        String s = null;
-        for (int i = 0; i < users.getSize(); i++) {
-            s = "Product{" + "name='" + name + '\'' + ", cost=" + cost + ", Shared between='" + users.getUser(i) + '}';
-        }
-        return s;
+
+        return "Product {"
+                + "name= '" + name + '\''
+                + ", cost= '" + cost + '\''
+                + ", Shared between=" + getUserNames()
+                + '}';
+
     }
 }

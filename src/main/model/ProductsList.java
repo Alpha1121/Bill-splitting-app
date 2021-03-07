@@ -24,6 +24,7 @@ public class ProductsList {
         }
     }
 
+
     public float getTotalBalance() {
         return totalBalance;
     }
