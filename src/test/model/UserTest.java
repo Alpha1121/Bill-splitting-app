@@ -9,7 +9,7 @@ class UserTest {
     User u2;
 
     @BeforeEach
-    public void setup() {
+    public void runBefore() {
         u1 = new User("Amogh");
         u2 = new User("Matt");
     }
