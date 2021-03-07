@@ -2,7 +2,7 @@ package model;
 
 public class Product {
 
-    String name;
+    private String name;
     private double cost;
     UsersList prodUsers = new UsersList();
 
@@ -13,7 +13,6 @@ public class Product {
     public Product(String name, double cost) {
         setName(name);
         setCost(cost);
-
     }
 
 
