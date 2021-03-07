@@ -50,7 +50,7 @@ public class ProductsList {
                 i++;
             }
         } else {
-            s = "No Products to show";
+            s = "[ No Products to show ]";
         }
 
         return s;

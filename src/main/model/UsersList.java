@@ -54,10 +54,14 @@ public class UsersList {
      */
     public String getAllUsers() {
         String s = "";
-        int i = 1;
-        for (User u : allUsers) {
-            s += " " + i + ".  " + u.toString() + "\n";
-            i++;
+        if (allUsers.size() != 0) {
+            int i = 1;
+            for (User u : allUsers) {
+                s += " " + i + ".  " + u.toString() + "\n";
+                i++;
+            }
+        } else {
+            s = "[ No Users to show ]";
         }
 
         return s;
