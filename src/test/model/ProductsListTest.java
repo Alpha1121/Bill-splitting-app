@@ -15,8 +15,8 @@ public class ProductsListTest {
     UsersList usersList1;
     UsersList usersList2;
 
-    ProductsList list1;
-    ProductsList list2;
+    ProductsList productsList1;
+    ProductsList productsList2;
 
     @BeforeEach
     public void runBefore() {
@@ -27,41 +27,50 @@ public class ProductsListTest {
         u2 = new User("Morty");
         u3 = new User("Rick");
 
-        list1 = new ProductsList();
-        list2 = new ProductsList();
+        usersList1.addUserToList(u1);
+        usersList1.addUserToList(u2);
+
+        usersList2.addUserToList(u2);
+        usersList2.addUserToList(u3);
+
+        p1.setProdUsers(usersList1);
+        p2.setProdUsers(usersList2);
+
+        productsList1 = new ProductsList();
+        productsList2 = new ProductsList();
     }
 
     @Test
     public void testAddProductToListGetProduct() {
-        list1.addProductToList(p1);
+        productsList1.addProductToList(p1);
 
-        assertEquals(p1, list1.getProduct(0));
+        assertEquals(p1, productsList1.getProduct(0));
 
     }
 
     @Test
     public void testRemoveProductFromList() {
-        list1.addProductToList(p1);
-        list1.addProductToList(p2);
-        assertTrue(list1.removeProductFromList(p2));
+        productsList1.addProductToList(p1);
+        productsList1.addProductToList(p2);
+        assertTrue(productsList1.removeProductFromList(p2));
     }
 
     @Test
     public void testGetTotalBalance() {
-        list1.addProductToList(p1);
-        list1.addProductToList(p2);
-        assertEquals(150.00, list1.getTotalBalance());
+        productsList1.addProductToList(p1);
+        productsList1.addProductToList(p2);
+        assertEquals(150.00, productsList1.getTotalBalance());
 
-        list1.removeProductFromList(p2);
-        assertEquals(100.00, list1.getTotalBalance());
+        productsList1.removeProductFromList(p2);
+        assertEquals(100.00, productsList1.getTotalBalance());
     }
 
     @Test
     public void testGetAllProducts() {
-        list1.addProductToList(p1);
-        list1.addProductToList(p2);
+        productsList1.addProductToList(p1);
+        productsList1.addProductToList(p2);
 
-        String s = list1.getAllProducts();
+        String s = productsList1.getAllProducts();
 
         assertEquals(" 1.  Product {name= 'Coffee', cost= '100.0', Shared between= All Users}\n" +
                 " 2.  Product {name= 'Milk', cost= '50.0', Shared between= All Users}\n", s);
