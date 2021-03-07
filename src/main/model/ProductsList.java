@@ -7,7 +7,7 @@ public class ProductsList {
     List<Product> productList = new ArrayList<Product>();
     double totalBalance;
 
-
+    //EFFECT: Adds prod to the productList and also increases the totalBalance by the amount of the product
     public void addProductToList(Product prod) {
         productList.add(prod);
         totalBalance += prod.getCost();
@@ -17,6 +17,11 @@ public class ProductsList {
         return productList.get(ind);
     }
 
+    /*
+     * EFFECTS:
+     * returns true if productList contains prod and is successfully removed
+     * else returns false.
+     */
     public boolean removeProductFromList(Product prod) {
         if (productList.contains(prod)) {
             productList.remove(prod);
@@ -33,11 +38,12 @@ public class ProductsList {
     }
 
 
-
-
+    /*
+     * EFFECTS: returns a string representation of all the products in the ProductsList
+     */
     public String getAllProducts() {
         String s = "";
-        if (productList != null) {
+        if (productList.size() != 0) {
             int i = 1;
             for (Product p : productList) {
                 s += (" " + i + ".  " + p.toString() + "\n");

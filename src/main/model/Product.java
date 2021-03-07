@@ -10,6 +10,7 @@ public class Product {
     public Product() {
     }
 
+    //Constructor with name and cost as parameters
     public Product(String name, double cost) {
         setName(name);
         setCost(cost);
@@ -89,7 +90,9 @@ public class Product {
     }
 
 
-
+    /*
+     * EFFECTS: returns a string representation of the product
+     */
     @Override
     public String toString() {
 

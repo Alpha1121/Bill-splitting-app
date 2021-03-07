@@ -1,26 +1,43 @@
 package model;
 
+import com.sun.xml.internal.ws.api.message.ExceptionHasMessage;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class UsersList {
     List<User> allUsers = new ArrayList<User>();
 
+    //MODIFIES this
     public void addUserToList(User u) {
         allUsers.add(u);
     }
 
+    //REQUIRES: ind >= 0
+    //EFFECTS: returns the User object according to the index entered in the parameter.
     public User getUserFromList(int ind) {
-        return allUsers.get(ind);
+        if (ind >= 0) {
+            return allUsers.get(ind);
+        } else {
+            return null;
+        }
     }
 
+    //REQUIRES: ind >= 0
+    //EFFECTS: returns the name of the User according to the index entered in the parameter.
     public String getUserName(int ind) {
-        return getUserFromList(ind).getName();
+        if (ind >= 0) {
+            return getUserFromList(ind).getName();
+        } else {
+            return null;
+        }
     }
 
-    public boolean removeUserFromList(int i) {
-        if (allUsers.contains(allUsers.get(i))) {
-            allUsers.remove(allUsers.get(i));
+    //REQUIRES: ind >= 0
+    //EFFECTS: removes the User object according to the index entered in the parameter.
+    public boolean removeUserFromList(int ind) {
+        if (allUsers.contains(allUsers.get(ind))) {
+            allUsers.remove(allUsers.get(ind));
             return true;
         } else {
             return false;
@@ -32,6 +49,9 @@ public class UsersList {
     }
 
 
+    /*
+     * EFFECTS: returns a string representation of all users in the UsersList
+     */
     public String getAllUsers() {
         String s = "";
         int i = 1;
