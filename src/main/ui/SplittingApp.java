@@ -22,7 +22,7 @@ public class SplittingApp {
 
     private void runApp() {
         boolean on = true;
-        String input = null;
+        String input;
 
         runDefault();
 

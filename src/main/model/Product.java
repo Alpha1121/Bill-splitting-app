@@ -80,7 +80,7 @@ public class Product {
         if (prodUsers.allUsers.size() != 0) {
             s = "";
             for (User u : prodUsers.allUsers) {
-                s += " \'" + u.getName() + "\' ";
+                s += " '" + u.getName() + "' ";
             }
         } else {
             s = " All Users";
