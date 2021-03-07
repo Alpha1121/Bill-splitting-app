@@ -10,6 +10,12 @@ public class Product {
     public Product() {
     }
 
+    public Product(String name, double cost) {
+        setName(name);
+        setCost(cost);
+
+    }
+
 
     public void setName(String name) {
         this.name = name;
@@ -25,6 +31,8 @@ public class Product {
     public void setCost(double cost) {
         if (cost >= 0) {
             this.cost = cost;
+        } else {
+            this.cost = 0;
         }
     }
 
@@ -39,8 +47,11 @@ public class Product {
      *          adds the users of that specific product to the list of prodUsers
      *          IF the product is used by ALL users then the list is EMPTY.
      */
-    public void setProdUsers(User u) {
-        prodUsers.addUserToList(u);
+    public boolean setProdUsers(UsersList list) {
+        for (User u : list.allUsers) {
+            prodUsers.addUserToList(u);
+        }
+        return true;
     }
 
 

@@ -5,7 +5,7 @@ import java.util.List;
 
 public class ProductsList {
     List<Product> productList = new ArrayList<Product>();
-    float totalBalance;
+    double totalBalance;
 
 
     public void addProductToList(Product prod) {
@@ -17,26 +17,36 @@ public class ProductsList {
         return productList.get(ind);
     }
 
-    public void removeProductFromList(Product prod) {
+    public boolean removeProductFromList(Product prod) {
         if (productList.contains(prod)) {
             productList.remove(prod);
             totalBalance -= prod.getCost();
+            return true;
+        } else {
+            return false;
         }
     }
 
 
-    public float getTotalBalance() {
+    public double getTotalBalance() {
         return totalBalance;
     }
 
 
 
 
-    public void getAllProducts() {
-        int i = 1;
-        for (Product p : productList) {
-            System.out.println(" " + i + ".  " + p.toString());
-            i++;
+    public String getAllProducts() {
+        String s = "";
+        if (productList != null) {
+            int i = 1;
+            for (Product p : productList) {
+                s += (" " + i + ".  " + p.toString() + "\n");
+                i++;
+            }
+        } else {
+            s = "No Products to show";
         }
+
+        return s;
     }
 }
