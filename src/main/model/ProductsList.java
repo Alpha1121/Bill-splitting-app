@@ -1,17 +1,40 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class ProductsList {
-    List<Product> productList = new ArrayList<Product>();
+    String name;
+    List<Product> productList;
     double totalBalance;
+
+    public ProductsList() {
+        productList = new ArrayList<Product>();
+    }
+
+    public ProductsList(String name) {
+        this.name = name;
+        productList = new ArrayList<Product>();
+    }
 
     //EFFECT: Adds prod to the productList and also increases the totalBalance by the amount of the product
     public void addProductToList(Product prod) {
         productList.add(prod);
         totalBalance += prod.getCost();
     }
+
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
 
     public Product getProduct(int ind) {
         return productList.get(ind);
@@ -55,4 +78,21 @@ public class ProductsList {
 
         return s;
     }
+
+
+
+
+    public JSONObject toJson() {
+        JSONObject jsonObject = new JSONObject();
+        JSONArray jsonArray = new JSONArray();
+
+        for (Product p : productList) {
+            jsonArray.put(p.toJson());
+        }
+
+        jsonObject.put("Products", jsonArray);
+        return jsonObject;
+    }
+
+
 }

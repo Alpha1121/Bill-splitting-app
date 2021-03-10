@@ -1,9 +1,14 @@
 package ui;
 
-import model.User;
+import java.io.FileNotFoundException;
 
 public class Main {
     public static void main(String[] args) {
-        new SplittingApp();
+
+        try {
+            new SplittingApp();
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to find file");
+        }
     }
 }

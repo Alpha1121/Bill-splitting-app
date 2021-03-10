@@ -1,10 +1,14 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 public class Product {
 
     private String name;
     private double cost;
-    UsersList prodUsers = new UsersList();
+    String prodUsers = null;
+    UsersList listOfUsers = new UsersList();
 
     //Empty constructor
     public Product() {
@@ -14,6 +18,21 @@ public class Product {
     public Product(String name, double cost) {
         setName(name);
         setCost(cost);
+    }
+
+    //Constructor with name, cost and ProdUsers
+    public Product(String name, double cost, String usersList) {
+        setName(name);
+        setCost(cost);
+        setProdUsers(usersList);
+    }
+
+    public String getProdUsers() {
+        return getUserNames();
+    }
+
+    public void setProdUsers(String prodUsers) {
+        this.prodUsers = prodUsers;
     }
 
 
@@ -47,9 +66,9 @@ public class Product {
      *          adds the users of that specific product to the list of prodUsers
      *          IF the product is used by ALL users then the list is EMPTY.
      */
-    public boolean setProdUsers(UsersList list) {
+    public boolean setListOfUsers(UsersList list) {
         for (User u : list.allUsers) {
-            prodUsers.addUserToList(u);
+            listOfUsers.addUserToList(u);
         }
         return true;
     }
@@ -61,9 +80,9 @@ public class Product {
      *          IF the product is used by ALL users then the list is EMPTY, and null value is returned
      *
      */
-    public UsersList getProdUsers() {
-        if (prodUsers != null) {
-            return prodUsers;
+    public UsersList getListOfUsers() {
+        if (listOfUsers != null) {
+            return listOfUsers;
         } else {
             return null;
         }
@@ -77,9 +96,9 @@ public class Product {
      */
     public String getUserNames() {
         String s;
-        if (prodUsers.allUsers.size() != 0) {
+        if (listOfUsers.allUsers.size() != 0) {
             s = "";
-            for (User u : prodUsers.allUsers) {
+            for (User u : listOfUsers.allUsers) {
                 s += " '" + u.getName() + "' ";
             }
         } else {
@@ -99,8 +118,30 @@ public class Product {
         return "Product {"
                 + "name= '" + name + '\''
                 + ", cost= '" + cost + '\''
-                + ", Shared between=" + getUserNames()
+                + ", Shared between=" + getProdUsers()
                 + '}';
 
+    }
+
+
+
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        json.put("cost", cost);
+
+        if (listOfUsers.allUsers.size() == 0) {
+            json.put("Users", "All Users");
+        } else {
+            JSONArray jsonArray = new JSONArray();
+            for (User u : listOfUsers.allUsers) {
+                JSONObject json1 = new JSONObject();
+                json1.put("name", u.getName());
+                jsonArray.put(json1);
+            }
+            json.put("listOfUsers",jsonArray);
+        }
+
+        return json;
     }
 }

@@ -1,22 +1,27 @@
 package ui;
 
-import model.Product;
-import model.ProductsList;
-import model.User;
-import model.UsersList;
+import model.*;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class SplittingApp {
-
+    private static final String JSON_STORE = "./data/SplittingApp.json";
     User user1;
     UsersList usersList;
     ProductsList productsList;
+    Bill bill;
     private static Scanner in = new Scanner(System.in);
 
-    public SplittingApp() {
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
+
+    public SplittingApp() throws FileNotFoundException {
         runApp();
     }
 
@@ -50,6 +55,12 @@ public class SplittingApp {
 
         user1 = new User("You");
         usersList.addUserToList(user1);
+
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
+
+        bill = new Bill(usersList, productsList);
+
     }
 
     //EFFECT uses the USERS input to perform appropriate functions
@@ -68,6 +79,10 @@ public class SplittingApp {
             removeItem();
         } else if (input.equals("g")) {
             finalBalance();
+        } else if (input.equals("s")) {
+            saveBill();
+        } else if (input.equals("l")) {
+            loadBill();
         } else {
             System.out.println("Selection not valid...");
         }
@@ -84,6 +99,8 @@ public class SplittingApp {
         System.out.println("\te -> view all items");
         System.out.println("\tf -> Remove an item");
         System.out.println("\tg -> Show final balance owed by all users");
+        System.out.println("\ts -> to save the current split account");
+        System.out.println("\tl -> to load the old split account");
         System.out.println("\tq -> to quit");
 
     }
@@ -187,15 +204,13 @@ public class SplittingApp {
             u.addBalance(splitCost);
             list.addUserToList(u);
         }
-        p.setProdUsers(list);
+        p.setListOfUsers(list);
 
     }
 
     //EFFECT shows all the products and their details.
     private void showItems() {
-
         System.out.println(productsList.getAllProducts());
-
     }
 
     //MODIFIES this
@@ -207,14 +222,14 @@ public class SplittingApp {
         Product p = productsList.getProduct(i - 1);
         productsList.removeProductFromList(p);
         deduct(p);
-        System.out.println("Removed product:" + p.getName() + "\nShared by: " + p.getUserNames());
+        System.out.println("Removed product:" + p.getName() + "\nShared by: " + p.getProdUsers());
 
     }
 
     //EFFECT checks if product is being shared by some users or all
     private void deduct(Product p) {
 
-        if (p.getProdUsers().getSize() == 0) {
+        if (p.getListOfUsers().getSize() == 0) {
             deductFromAll(p);
         } else {
             deductFromSome(p);
@@ -224,7 +239,7 @@ public class SplittingApp {
     //MODIFIES User.balance
     //EFFECT deducts owed balance of the product only from Users sharing the specified product
     private void deductFromSome(Product p) {
-        UsersList prodUsers = p.getProdUsers();
+        UsersList prodUsers = p.getListOfUsers();
         double splitBalance = (p.getCost() / prodUsers.getSize());
 
         System.out.println("Deducted owed balance of: ");
@@ -250,7 +265,34 @@ public class SplittingApp {
     //EFFECT shows total balance and balance owed by all users
     private void finalBalance() {
         System.out.println("Total cost = " + productsList.getTotalBalance());
-        showUsers();
+        System.out.println(bill.toString());
+    }
+
+    // EFFECTS: saves the workroom to file
+    private void saveBill() {
+        try {
+            System.out.println("Name that you want to give your Bill:");
+            String inp1 = in.next();
+            bill.setName(inp1);
+
+            jsonWriter.open();
+            jsonWriter.write(bill);
+            jsonWriter.close();
+            System.out.println("Saved " + bill.getName() + " to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads workroom from file
+    private void loadBill() {
+        try {
+            bill = jsonReader.readBill();
+            System.out.println("Loaded " + bill.getName() + " from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
     }
 
 }

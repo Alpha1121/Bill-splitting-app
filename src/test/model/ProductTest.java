@@ -46,10 +46,10 @@ public class ProductTest {
         p1.setCost(100);
         list1.addUserToList(u1);
 
-        assertTrue(p1.setProdUsers(list1));
+        assertTrue(p1.setListOfUsers(list1));
 
 
-        list2 = p1.getProdUsers();
+        list2 = p1.getListOfUsers();
         u2 = list2.getUserFromList(0);
         assertEquals(u1,u2);
 
@@ -65,7 +65,7 @@ public class ProductTest {
         p2.setCost(100);
         list1.addUserToList(u1);
         list1.addUserToList(u2);
-        p2.setProdUsers(list1);
+        p2.setListOfUsers(list1);
         assertEquals(" 'Amogh'  'Mary' ", p2.getUserNames());
     }
 
@@ -80,7 +80,7 @@ public class ProductTest {
         p2.setCost(100);
         list1.addUserToList(u1);
         list1.addUserToList(u2);
-        p2.setProdUsers(list1);
+        p2.setListOfUsers(list1);
         assertEquals("Product {name= 'Milk', cost= '100.0', Shared between= 'Amogh'  'Mary' }", p2.toString());
 
     }

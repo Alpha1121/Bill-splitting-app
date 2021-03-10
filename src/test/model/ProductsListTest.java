@@ -33,8 +33,8 @@ public class ProductsListTest {
         usersList2.addUserToList(u2);
         usersList2.addUserToList(u3);
 
-        p1.setProdUsers(usersList1);
-        p2.setProdUsers(usersList2);
+        p1.setListOfUsers(usersList1);
+        p2.setListOfUsers(usersList2);
 
         productsList1 = new ProductsList();
         productsList2 = new ProductsList();

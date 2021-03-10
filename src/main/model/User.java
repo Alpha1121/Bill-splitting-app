@@ -1,5 +1,8 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 public class User extends UsersList {
     private String name;
     private double balance;
@@ -10,6 +13,10 @@ public class User extends UsersList {
         setName(name);
     }
 
+    public User(String name, double balance) {
+        setName(name);
+        addBalance(balance);
+    }
 
     public void setName(String name) {
         this.name = name;
@@ -60,5 +67,14 @@ public class User extends UsersList {
     @Override
     public String toString() {
         return ("User {" + "name='" + name + '\'' + ", Balance Owed=" + getBalance() + '}');
+    }
+
+
+
+    public JSONObject userToJson() {
+        JSONObject json = new JSONObject();
+        json.put("Balance Owed", balance);
+        json.put("name", name);
+        return json;
     }
 }

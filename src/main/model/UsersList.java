@@ -1,10 +1,32 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class UsersList {
-    List<User> allUsers = new ArrayList<User>();
+    String name;
+    List<User> allUsers;
+
+    public UsersList() {
+        allUsers = new ArrayList<User>();
+    }
+
+    public UsersList(String name) {
+        this.name = name;
+        allUsers = new ArrayList<User>();
+    }
+
+    public void setName(String name) {
+        this.name =  name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
 
     //MODIFIES this
     public void addUserToList(User u) {
@@ -64,4 +86,28 @@ public class UsersList {
 
         return s;
     }
+//
+//    public JSONObject toJson() {
+//        JSONObject json = new JSONObject();
+//        json.put("name", name);
+//        json.put("allUsers", getAllUsers());
+//        return json;
+//    }
+
+
+
+    public JSONObject toJson() {
+        JSONObject jsonObject = new JSONObject();
+        JSONArray jsonArray = new JSONArray();
+
+        for (User user : allUsers) {
+            jsonArray.put(user.userToJson());
+        }
+
+        jsonObject.put("Users",jsonArray);
+
+        return jsonObject;
+    }
+
+
 }
