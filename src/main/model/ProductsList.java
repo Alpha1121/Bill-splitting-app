@@ -6,6 +6,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+// Houses all the products which have attributes like name, cost and users(of the product)
 public class ProductsList {
     String name;
     List<Product> productList;
@@ -84,13 +85,14 @@ public class ProductsList {
 
     public JSONObject toJson() {
         JSONObject jsonObject = new JSONObject();
-        JSONArray jsonArray = new JSONArray();
 
+        JSONArray jsonArray = new JSONArray();
         for (Product p : productList) {
             jsonArray.put(p.toJson());
         }
 
-        jsonObject.put("Products", jsonArray);
+        jsonObject.put("ProductsList", jsonArray);
+
         return jsonObject;
     }
 

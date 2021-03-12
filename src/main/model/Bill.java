@@ -3,15 +3,16 @@ package model;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-
+// Super Class Bill that nests the usersList and productsList in it
 public class Bill {
     String name;
-    ArrayList<Object> bill = new ArrayList<Object>();
     UsersList usersList;
     ProductsList productsList;
 
+    //MODIFIES: this
+    //EFFECTS: constructor with single parameter(name)
     public Bill(String name) {
+        this.name = name;
         usersList = new UsersList();
         productsList = new ProductsList();
     }
@@ -19,9 +20,6 @@ public class Bill {
     public Bill(UsersList usersList, ProductsList productsList) {
         this.usersList = usersList;
         this.productsList = productsList;
-
-        bill.add(usersList);
-        bill.add(productsList);
     }
 
     public String getName() {
@@ -32,22 +30,30 @@ public class Bill {
         this.name = name;
     }
 
-    public void putUserList(User u) {
+    public UsersList getUsersList() {
+        return usersList;
+    }
+
+    public ProductsList  getProductsList() {
+        return productsList;
+    }
+
+    //MODIFIES: this
+    //EFFECTS: adds user u to usersList
+    public void putUserInList(User u) {
         usersList.addUserToList(u);
-        bill.add(usersList);
+        System.out.println("Bill.putUserInList passed");
     }
 
-    public void putProductsList(Product p, UsersList u) {
-        ProductsList productsList = new ProductsList();
+    //MODIFIES: this
+    //EFFECTS: adds product p to productsList
+    public void putProductsList(Product p) {
         productsList.addProductToList(p);
-        bill.add(productsList);
     }
 
+    //EFFECTS: returns a String representation of the bill
     public String toString() {
-        UsersList usersList = (UsersList) bill.get(0);
         String s1 = usersList.getAllUsers();
-
-        ProductsList productsList = (ProductsList) bill.get(1);
         String s2 = productsList.getAllProducts();
 
         String s3 = s1 + "\n" + s2;
@@ -68,10 +74,8 @@ public class Bill {
     private JSONArray billToJson() {
         JSONArray jsonArray = new JSONArray();
 
-        UsersList usersList = (UsersList) bill.get(0);
         jsonArray.put(usersList.toJson());
 
-        ProductsList productsList = (ProductsList) bill.get(1);
         jsonArray.put(productsList.toJson());
 
         return jsonArray;

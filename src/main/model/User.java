@@ -1,8 +1,8 @@
 package model;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
+//Users that would be using the SplittingApp to split the bill b/w each other
 public class User extends UsersList {
     private String name;
     private double balance;

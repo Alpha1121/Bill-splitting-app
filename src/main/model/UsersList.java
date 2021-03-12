@@ -6,6 +6,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+// Houses all the Users which have attributes like name and balance owed.
 public class UsersList {
     String name;
     List<User> allUsers;
@@ -73,6 +74,7 @@ public class UsersList {
      * EFFECTS: returns a string representation of all users in the UsersList
      */
     public String getAllUsers() {
+
         String s = "";
         if (allUsers.size() != 0) {
             int i = 1;
@@ -86,15 +88,6 @@ public class UsersList {
 
         return s;
     }
-//
-//    public JSONObject toJson() {
-//        JSONObject json = new JSONObject();
-//        json.put("name", name);
-//        json.put("allUsers", getAllUsers());
-//        return json;
-//    }
-
-
 
     public JSONObject toJson() {
         JSONObject jsonObject = new JSONObject();
@@ -104,7 +97,7 @@ public class UsersList {
             jsonArray.put(user.userToJson());
         }
 
-        jsonObject.put("Users",jsonArray);
+        jsonObject.put("UsersList",jsonArray);
 
         return jsonObject;
     }

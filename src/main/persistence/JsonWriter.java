@@ -33,7 +33,6 @@ public class JsonWriter {
     // EFFECTS: writes JSON representation of workroom to file
     public void write(Bill bill) {
         JSONObject json = bill.toJson();
-
         saveToFile(json.toString(TAB));
     }
 

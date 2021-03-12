@@ -19,9 +19,7 @@ public class JsonReader {
         this.source = source;
     }
 
-
-
-    // EFFECTS: reads workroom from file and returns it;
+    // EFFECTS: reads Bill from file and returns it;
     // throws IOException if an error occurs reading data from file
 
     public Bill readBill() throws IOException {
@@ -29,7 +27,6 @@ public class JsonReader {
         JSONObject jsonObject = new JSONObject(jsonData);
         return parseBill(jsonObject);
     }
-
 
     // EFFECTS: reads source file as string and returns it
     private String readFile(String source) throws IOException {
@@ -43,7 +40,7 @@ public class JsonReader {
     }
 
 
-    // EFFECTS: parses workroom from JSON object and returns it
+    // EFFECTS: parses bill from JSON object and returns it
     private Bill parseBill(JSONObject jsonObject) {
         String name = jsonObject.getString("name");
         Bill bill = new Bill(name);
@@ -52,51 +49,72 @@ public class JsonReader {
     }
 
 
-    // MODIFIES: wr
-    // EFFECTS: parses thingies from JSON object and adds them to workroom
+    // MODIFIES: Bill
+    // EFFECTS: parses usersList and productsList from JSON object and adds them to the bill
 
     private void addBill(Bill bill, JSONObject jsonObject) {
-        JSONArray jsonArray1 = jsonObject.getJSONArray("Users");
-        JSONArray jsonArray2 = jsonObject.getJSONArray("Products");
 
-        for (Object json : jsonArray1) {
+        JSONArray billJsonArray = jsonObject.getJSONArray("bill");
+
+        JSONObject usersJson = (JSONObject) billJsonArray.get(0);
+        JSONArray usersArray = (JSONArray) usersJson.get("UsersList");
+
+        JSONObject productsJson = (JSONObject) billJsonArray.get(1);
+        JSONArray productsArray = (JSONArray) productsJson.get("ProductsList");
+
+        for (Object json : usersArray) {
             JSONObject jsonObject1 = (JSONObject) json;
             addUser(bill, jsonObject1);
+            System.out.println("1 done");
         }
 
-        for (Object json : jsonArray2) {
+        for (Object json : productsArray) {
             JSONObject jsonObject2 = (JSONObject) json;
+            System.out.println("2 done");
             addProduct(bill, jsonObject2);
         }
     }
 
 
-
+    //MODIFIES: bill.usersList
+    //EFFECTS: parses User from JSON object and adds it to bill.usersList
     private void addUser(Bill bill, JSONObject jsonObject) {
         String name = jsonObject.getString("name");
         double balance = jsonObject.getDouble("Balance Owed");
         User u = new User(name,balance);
-        bill.putUserList(u);
+        System.out.println("addUser passed");
+        bill.putUserInList(u);
     }
 
-    // MODIFIES: wr
-    // EFFECTS: parses thingy from JSON object and adds it to workroom
+
+    // MODIFIES: bill.productsList
+    // EFFECTS: parses Products from JSON object and adds it to bill.productsList
+    //          also parses Users from JSON object1 and adds it to bill.productsList.product.listOfUsers
     private void addProduct(Bill bill, JSONObject jsonObject) {
         String name = jsonObject.getString("name");
         double cost = jsonObject.getDouble("cost");
 
-        JSONArray jsonArray = jsonObject.getJSONArray("listOfUsers");
-        for (Object json : jsonArray) {
+        JSONArray usersJson = jsonObject.getJSONArray("listOfUsers");
+        System.out.println("3 done");
+        UsersList prodUsers = new UsersList();
+
+        for (Object json : usersJson) {
             JSONObject jsonObject1 = (JSONObject) json;
-            addProdUser(bill, jsonObject1);
+            System.out.println("4 done");
+            prodUsers.addUserToList(addProdUserToList(jsonObject1));
+            System.out.println("5 done");
         }
 
-
+        Product p = new Product(name, cost, prodUsers);
+        bill.putProductsList(p);
     }
 
-    private void addProdUser(Bill bill, JSONObject jsonObject) {
+
+    //EFFECTS: parses Users from (JSON object) listOfUsers returns it
+    private User addProdUserToList(JSONObject jsonObject) {
         String name = jsonObject.getString("name");
-        User u = new User(name);
-        
+        User user = new User(name);
+
+        return user;
     }
 }

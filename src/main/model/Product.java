@@ -7,7 +7,6 @@ public class Product {
 
     private String name;
     private double cost;
-    String prodUsers = null;
     UsersList listOfUsers = new UsersList();
 
     //Empty constructor
@@ -21,18 +20,14 @@ public class Product {
     }
 
     //Constructor with name, cost and ProdUsers
-    public Product(String name, double cost, String usersList) {
+    public Product(String name, double cost, UsersList usersList) {
         setName(name);
         setCost(cost);
-        setProdUsers(usersList);
+        setListOfUsers(usersList);
     }
 
     public String getProdUsers() {
         return getUserNames();
-    }
-
-    public void setProdUsers(String prodUsers) {
-        this.prodUsers = prodUsers;
     }
 
 
