@@ -1,8 +1,11 @@
 package model;
 
-import model.Category;
-import model.Thingy;
-import model.WorkRoom;
+import model.User;
+import model.UsersList;
+import model.Bill;
+import model.Product;
+import model.ProductsList;
+
 import org.junit.jupiter.api.Test;
 import persistence.JsonReader;
 import persistence.JsonWriter;
