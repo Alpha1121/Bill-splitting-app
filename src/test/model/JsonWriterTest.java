@@ -41,7 +41,7 @@ class JsonWriterTest {
             writer.write(b);
             writer.close();
 
-            JsonReader reader = new JsonReader("./data/testWriterEmptyWorkroom.json");
+            JsonReader reader = new JsonReader("./data/testWriterEmptyBill.json");
 //            b = reader.read();
             assertEquals("MyBill", b.getName());
             assertEquals(0, b.usersList.getSize());
