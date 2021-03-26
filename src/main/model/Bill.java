@@ -42,7 +42,7 @@ public class Bill {
     //EFFECTS: adds user u to usersList
     public void putUserInList(User u) {
         usersList.addUserToList(u);
-        System.out.println("Bill.putUserInList passed");
+//        System.out.println("Bill.putUserInList passed");
     }
 
     //MODIFIES: this

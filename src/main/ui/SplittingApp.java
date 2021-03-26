@@ -97,8 +97,8 @@ public class SplittingApp {
         System.out.println("\ta -> add new user");
         System.out.println("\tb -> Show all users");
         System.out.println("\tc -> Remove an existing user");
-        System.out.println("\td -> add an item");
-        System.out.println("\te -> view all items");
+        System.out.println("\td -> Add an item");
+        System.out.println("\te -> View all items");
         System.out.println("\tf -> Remove an item");
         System.out.println("\tg -> Show final balance owed by all users");
         System.out.println("\ts -> to save the current Bill");

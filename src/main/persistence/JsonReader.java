@@ -65,12 +65,12 @@ public class JsonReader {
         for (Object json : usersArray) {
             JSONObject jsonObject1 = (JSONObject) json;
             addUser(bill, jsonObject1);
-            System.out.println("1 done");
+//            System.out.println("1 done");
         }
 
         for (Object json : productsArray) {
             JSONObject jsonObject2 = (JSONObject) json;
-            System.out.println("2 done");
+//            System.out.println("2 done");
             addProduct(bill, jsonObject2);
         }
     }
@@ -82,7 +82,7 @@ public class JsonReader {
         String name = jsonObject.getString("name");
         double balance = jsonObject.getDouble("Balance Owed");
         User u = new User(name,balance);
-        System.out.println("addUser passed");
+//        System.out.println("addUser passed");
         bill.putUserInList(u);
     }
 
@@ -95,14 +95,14 @@ public class JsonReader {
         double cost = jsonObject.getDouble("cost");
 
         JSONArray usersJson = jsonObject.getJSONArray("listOfUsers");
-        System.out.println("3 done");
+//        System.out.println("3 done");
         UsersList prodUsers = new UsersList();
 
         for (Object json : usersJson) {
             JSONObject jsonObject1 = (JSONObject) json;
-            System.out.println("4 done");
+//            System.out.println("4 done");
             prodUsers.addUserToList(addProdUserToList(jsonObject1));
-            System.out.println("5 done");
+//            System.out.println("5 done");
         }
 
         Product p = new Product(name, cost, prodUsers);
