@@ -1,0 +1,42 @@
+{
+    "name": "Amoghs",
+    "bill": [
+        {"UsersList": [
+            {
+                "Balance Owed": 150,
+                "name": "You"
+            },
+            {
+                "Balance Owed": 150,
+                "name": "Amogh"
+            },
+            {
+                "Balance Owed": 100,
+                "name": "Matt"
+            }
+        ]},
+        {"ProductsList": [
+            {
+                "cost": 100,
+                "name": "Coffee",
+                "listOfUsers": [{"name": "You"}]
+            },
+            {
+                "cost": 100,
+                "name": "Milk",
+                "listOfUsers": [
+                    {"name": "You"},
+                    {"name": "Amogh"}
+                ]
+            },
+            {
+                "cost": 200,
+                "name": "Butter",
+                "listOfUsers": [
+                    {"name": "Amogh"},
+                    {"name": "Matt"}
+                ]
+            }
+        ]}
+    ]
+}
