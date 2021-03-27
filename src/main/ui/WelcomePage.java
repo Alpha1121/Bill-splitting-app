@@ -26,15 +26,20 @@ public class WelcomePage extends JFrame {
         loadBillButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                MainMenuPage mainMenuPage = new MainMenuPage(bill);
-                mainMenuPage.setVisible(true);
-                dispose();
+
+                int i = JOptionPane.showConfirmDialog(rootPanel, "Load old bill?");
+                if (i == 0) {
+                    MainMenuPage mainMenuPage = new MainMenuPage(bill);
+                    mainMenuPage.setVisible(true);
+                    dispose();
+                }
             }
         });
+
         createNewBillButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showConfirmDialog(rootPanel, "New bill created");
+                JOptionPane.showConfirmDialog(rootPanel, "Create New bill?");
 
                 //create object
                 bill = new Bill("New Bill");

@@ -5,6 +5,7 @@ import model.Bill;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 public class MainMenuPage extends JFrame {
 
@@ -41,7 +42,9 @@ public class MainMenuPage extends JFrame {
         viewBillButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                ProductRelated productRelated = new ProductRelated(bill);
+                productRelated.setVisible(true);
+                dispose();
             }
         });
     }
@@ -59,7 +62,17 @@ public class MainMenuPage extends JFrame {
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                int i = JOptionPane.showConfirmDialog(rootPanel1, "Bill won't be saved, Continue?");
+                if (i == 0) {
+                    WelcomePage welcomePage = null;
+                    try {
+                        welcomePage = new WelcomePage();
+                    } catch (IOException exception) {
+                        exception.printStackTrace();
+                    }
+                    welcomePage.setVisible(true);
+                    dispose();
+                }
             }
         });
     }
