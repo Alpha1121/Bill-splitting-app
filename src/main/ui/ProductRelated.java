@@ -60,10 +60,5 @@ public class ProductRelated extends JFrame {
         });
     }
 
-    private void createUIComponents() {
-        tblProds = new JTable();
-        defaultTable = (DefaultTableModel) tblProds.getModel();
-    }
-
 
 }

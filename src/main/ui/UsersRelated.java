@@ -5,10 +5,10 @@ import model.User;
 import model.UsersList;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class UsersRelated extends JFrame {
     // Variables declaration
@@ -16,51 +16,46 @@ public class UsersRelated extends JFrame {
     private javax.swing.JLabel label1;
     private Bill bill;
 
-    private javax.swing.JTable tblUsers;
-    private DefaultTableModel defaultTable;
+//    private javax.swing.JTable tblUsers;
+//    private DefaultTableModel defaultTable;
+
+    private DefaultListModel<String> listModel = new DefaultListModel<String>();
 
     private JButton addUserButton;
     private JButton removeUserButton;
     private JButton backButton;
+    private JList<String> list1;
+    private int selectedIndex;
+    private String selectedName;
 
     public UsersRelated(Bill bill) {
         getContentPane().add(usersPanel);
-//        getContentPane().setLayout(new BorderLayout());
 
-//        add(usersPanel);
+
         setTitle("User Menu");
         setSize(400,500);
         this.bill = bill;
 
-        initializeTable();
-
         showUsers(bill);
+
         addUserButtonPressed(bill);
-//        removeUserButtonPressed(bill);
+        removeUserButtonPressed(bill);
         backButtonPressed();
-
-
+        userSelectedInList(bill);
     }
 
-    private void initializeTable() {
-//        tblUsers = new JTable();
-        defaultTable = (DefaultTableModel) tblUsers.getModel();
-        tblUsers.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-
-    }
 
     private void showUsers(Bill bill) {
 
         UsersList usersList = bill.getUsersList();
+
         for (int i = 0; i < usersList.getSize(); i++) {
             User user = usersList.getUserFromList(i);
-            System.out.println(user.toString());
-            String[] o = {user.getName(), String.valueOf(user.getBalance())};
-            defaultTable.addRow(o);
-            System.out.println("Done " + i);
-            System.out.println(defaultTable.getRowCount());
 
+            listModel.addElement(user.getName() + "         " + user.getBalance());
         }
+
+        list1.setModel(listModel);
 
     }
 
@@ -75,7 +70,44 @@ public class UsersRelated extends JFrame {
         });
     }
 
+    private void userSelectedInList(Bill bill) {
+        list1.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                int index = list1.getSelectedIndex();
+
+                if (index >= 0) {
+                    selectedIndex = index;
+                    selectedName = listModel.get(index);
+                } else {
+                    JOptionPane.showMessageDialog(usersPanel, "Please add new User");
+                }
+
+
+            }
+        });
+    }
+
     private void removeUserButtonPressed(Bill bill) {
+        removeUserButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                UsersList usersList = bill.getUsersList();
+
+                for (int i = 0; i < usersList.getSize(); i++) {
+                    User u = usersList.getUserFromList(i);
+
+                    if (selectedName.contains(u.getName())) {
+                        usersList.removeUserFromList(i);
+                        JOptionPane.showMessageDialog(usersPanel, "User removed: " + u.getName());
+                    }
+                }
+
+                listModel.remove(selectedIndex);
+            }
+        });
+
     }
 
     private void backButtonPressed() {

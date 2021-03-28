@@ -2,18 +2,25 @@ package ui;
 
 import model.Bill;
 
+import persistence.JsonWriter;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class MainMenuPage extends JFrame {
+    private static final String JSON_STORE = "./data/SplittingApp.json";
+    JsonWriter jsonWriter = new JsonWriter(JSON_STORE);
 
+    private JPanel rootPanel1;
+
+    //Buttons
     private JButton showUsersButton;
     private JButton viewBillButton;
     private JButton saveBillButton;
     private JButton backButton;
-    private JPanel rootPanel1;
 
     public MainMenuPage(Bill bill) {
         add(rootPanel1);
@@ -25,7 +32,6 @@ public class MainMenuPage extends JFrame {
         saveBillButtonPressed(bill);
         backButtonPressed();
     }
-
 
     private void showAllUsersButtonPressed(Bill bill) {
         showUsersButton.addActionListener(new ActionListener() {
@@ -53,6 +59,15 @@ public class MainMenuPage extends JFrame {
         saveBillButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                bill.setName("Split Bill");
+
+                try {
+                    jsonWriter.open();
+                    jsonWriter.write(bill);
+                    jsonWriter.close();
+                } catch (FileNotFoundException fileNotFoundException) {
+                    JOptionPane.showMessageDialog(rootPanel1,"Error: File not Saved!");
+                }
 
             }
         });
@@ -62,11 +77,11 @@ public class MainMenuPage extends JFrame {
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int i = JOptionPane.showConfirmDialog(rootPanel1, "Bill won't be saved, Continue?");
+                int i = JOptionPane.showConfirmDialog(rootPanel1, "Changes won't be saved, Continue?");
                 if (i == 0) {
-                    WelcomePage welcomePage = null;
+                    AppWelcomePage welcomePage = null;
                     try {
-                        welcomePage = new WelcomePage();
+                        welcomePage = new AppWelcomePage();
                     } catch (IOException exception) {
                         exception.printStackTrace();
                     }

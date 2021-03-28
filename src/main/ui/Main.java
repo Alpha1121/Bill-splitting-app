@@ -13,9 +13,9 @@ public class Main {
             SwingUtilities.invokeLater(new Runnable() {
                 @Override
                 public void run() {
-                    WelcomePage welcomePage = null;
+                    AppWelcomePage welcomePage = null;
                     try {
-                        welcomePage = new WelcomePage();
+                        welcomePage = new AppWelcomePage();
                     } catch (IOException exception) {
                         System.out.println(exception.getCause());
                     }

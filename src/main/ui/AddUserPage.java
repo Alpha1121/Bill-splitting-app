@@ -42,6 +42,9 @@ public class AddUserPage extends JFrame {
                     String userName = userNameTextField.getText();
                     User user = new User(userName);
                     bill.getUsersList().addUserToList(user);
+
+                    JOptionPane.showMessageDialog(addUserPanel, "Added User");
+                    userNameTextField.setText("");
                 }
             }
         });
