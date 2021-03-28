@@ -15,33 +15,33 @@ public class UsersRelated extends JFrame {
     private JPanel usersPanel;
     private javax.swing.JLabel label1;
     private Bill bill;
+    private int selectedIndex;
+    private String selectedName;
 
-//    private javax.swing.JTable tblUsers;
-//    private DefaultTableModel defaultTable;
-
+    //List related declarations
+    private JList<String> list1;
     private DefaultListModel<String> listModel = new DefaultListModel<String>();
 
+    //Buttons
     private JButton addUserButton;
     private JButton removeUserButton;
     private JButton backButton;
-    private JList<String> list1;
-    private int selectedIndex;
-    private String selectedName;
 
     public UsersRelated(Bill bill) {
         getContentPane().add(usersPanel);
 
 
-        setTitle("User Menu");
+        setTitle("User Page");
         setSize(400,500);
         this.bill = bill;
 
         showUsers(bill);
 
+        userSelectedInList();
+
         addUserButtonPressed(bill);
         removeUserButtonPressed(bill);
         backButtonPressed();
-        userSelectedInList(bill);
     }
 
 
@@ -70,7 +70,7 @@ public class UsersRelated extends JFrame {
         });
     }
 
-    private void userSelectedInList(Bill bill) {
+    private void userSelectedInList() {
         list1.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {

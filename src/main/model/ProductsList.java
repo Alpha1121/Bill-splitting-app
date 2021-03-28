@@ -36,16 +36,21 @@ public class ProductsList {
         return name;
     }
 
+    public int getSize() {
+        return productList.size();
+
+    }
+
 
     public Product getProduct(int ind) {
         return productList.get(ind);
     }
-
     /*
      * EFFECTS:
      * returns true if productList contains prod and is successfully removed
      * else returns false.
      */
+
     public boolean removeProductFromList(Product prod) {
         if (productList.contains(prod)) {
             productList.remove(prod);
@@ -61,10 +66,10 @@ public class ProductsList {
         return totalBalance;
     }
 
-
     /*
      * EFFECTS: returns a string representation of all the products in the ProductsList
      */
+
     public String getAllProducts() {
         String s = "";
         if (productList.size() != 0) {
@@ -95,6 +100,5 @@ public class ProductsList {
 
         return jsonObject;
     }
-
 
 }

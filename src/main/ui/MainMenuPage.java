@@ -48,8 +48,8 @@ public class MainMenuPage extends JFrame {
         viewBillButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ProductRelated productRelated = new ProductRelated(bill);
-                productRelated.setVisible(true);
+                BillPage billPage = new BillPage(bill);
+                billPage.setVisible(true);
                 dispose();
             }
         });
@@ -79,9 +79,9 @@ public class MainMenuPage extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 int i = JOptionPane.showConfirmDialog(rootPanel1, "Changes won't be saved, Continue?");
                 if (i == 0) {
-                    AppWelcomePage welcomePage = null;
+                    WelcomePage welcomePage = null;
                     try {
-                        welcomePage = new AppWelcomePage();
+                        welcomePage = new WelcomePage();
                     } catch (IOException exception) {
                         exception.printStackTrace();
                     }

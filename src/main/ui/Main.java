@@ -1,7 +1,6 @@
 package ui;
 
 import javax.swing.*;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class Main {
@@ -13,9 +12,9 @@ public class Main {
             SwingUtilities.invokeLater(new Runnable() {
                 @Override
                 public void run() {
-                    AppWelcomePage welcomePage = null;
+                    WelcomePage welcomePage = null;
                     try {
-                        welcomePage = new AppWelcomePage();
+                        welcomePage = new WelcomePage();
                     } catch (IOException exception) {
                         System.out.println(exception.getCause());
                     }

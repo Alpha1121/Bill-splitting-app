@@ -3,6 +3,9 @@ package model;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Product {
 
     private String name;
@@ -103,6 +106,22 @@ public class Product {
         return s;
     }
 
+    /*MODIFIES user.balance && product.users
+     *EFFECT :
+     *  makes a Integer List to store the serial numbers of Users entered by the USER
+     *  accordingly adds those Users(using those serial numbers) to a list
+     *  sends the list to Product.setProdUsers to set the Users using that product.
+     *
+     */
+    public void split(Product p, Bill bill) {
+        int num = p.listOfUsers.getSize();
+        double splitCost = (p.getCost() / num);
+
+        for (int i = 0; i < num; i++) {
+            User u = p.listOfUsers.getUserFromList(i);
+            u.addBalance(splitCost);
+        }
+    }
 
     /*
      * EFFECTS: returns a string representation of the product
@@ -110,11 +129,9 @@ public class Product {
     @Override
     public String toString() {
 
-        return "Product {"
-                + "name= '" + name + '\''
-                + ", cost= '" + cost + '\''
-                + ", Shared between=" + getProdUsers()
-                + '}';
+        return "name= '" + name + '\''
+                + ",    cost= '" + cost + '\''
+                + ",    Shared between=" + getProdUsers();
 
     }
 

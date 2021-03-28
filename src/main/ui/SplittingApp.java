@@ -160,26 +160,6 @@ public class SplittingApp {
 
     }
 
-    //MODIFIES user.balance
-    //EFFECT splits the balance of an item shared by everyone, between every person
-    private void splitToAll(Product p) {
-        double splitBalance = (p.getCost() / bill.getUsersList().getSize());
-        for (int i = 0; i < bill.getUsersList().getSize(); i++) {
-            User u = bill.getUsersList().getUserFromList(i);
-            u.addBalance(splitBalance);
-        }
-
-    }
-
-    //EFFECT splits the cost of an item between specific users
-    private void splitBetween(Product p) {
-        System.out.println("Enter the number of people using this item");
-        int num = in.nextInt();
-        split(num, p);
-
-
-    }
-
     /*MODIFIES user.balance && product.users
      *EFFECT :
      *  makes a Integer List to store the serial numbers of Users entered by the USER
@@ -209,6 +189,28 @@ public class SplittingApp {
         p.setListOfUsers(list);
 
     }
+
+    //MODIFIES user.balance
+    //EFFECT splits the balance of an item shared by everyone, between every person
+    private void splitToAll(Product p) {
+        double splitBalance = (p.getCost() / bill.getUsersList().getSize());
+        for (int i = 0; i < bill.getUsersList().getSize(); i++) {
+            User u = bill.getUsersList().getUserFromList(i);
+            u.addBalance(splitBalance);
+        }
+
+    }
+
+    //EFFECT splits the cost of an item between specific users
+    private void splitBetween(Product p) {
+        System.out.println("Enter the number of people using this item");
+        int num = in.nextInt();
+        split(num, p);
+
+
+    }
+
+
 
     //EFFECT shows all the products and their details.
     private void showItems() {
