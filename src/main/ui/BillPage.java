@@ -98,7 +98,7 @@ public class BillPage extends JFrame {
                     Product p = productsList.getProduct(i);
 
                     if (selectedProductName.contains(p.getName())) {
-                        productsList.removeProductFromList(p);
+                        productsList.removeProductFromList(p, bill);
                         JOptionPane.showMessageDialog(billPanel, "Product removed: " + p.getName());
                         BillPage billPage = new BillPage(bill);
                         billPage.setVisible(true);

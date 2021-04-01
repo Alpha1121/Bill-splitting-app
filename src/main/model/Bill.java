@@ -34,6 +34,10 @@ public class Bill {
         return usersList;
     }
 
+    public void removeUserFromBill(User user) {
+        usersList.removeUserFromList(user);
+    }
+
     public ProductsList  getProductsList() {
         return productsList;
     }

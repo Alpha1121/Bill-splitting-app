@@ -18,12 +18,10 @@ public class WelcomePage extends JFrame {
     private JButton createNewBillButton;
     private JLabel label;
 
-
     public WelcomePage() throws IOException {
         add(rootPanel);
         setTitle("Bill Splitting App");
         setSize(400,500);
-
         loadBillButtonPressed(bill);
         createNewBillButtonPressed(bill);
     }
@@ -37,6 +35,7 @@ public class WelcomePage extends JFrame {
                 if (i == 0) {
                     MainMenuPage mainMenuPage = new MainMenuPage(bill);
                     mainMenuPage.setVisible(true);
+
                     dispose();
                 }
             }

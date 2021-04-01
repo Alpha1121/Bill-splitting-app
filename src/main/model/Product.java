@@ -113,19 +113,43 @@ public class Product {
      *  sends the list to Product.setProdUsers to set the Users using that product.
      *
      */
-    public void split(Product p, Bill bill) {
-        int num = p.listOfUsers.getSize();
-        double splitCost = (p.getCost() / num);
+    public void split(Bill bill) {
+        changeUsersBalance(bill, true);
+    }
 
-        for (int i = 0; i < num; i++) {
-            User u = p.listOfUsers.getUserFromList(i);
-            u.addBalance(splitCost);
+    private void changeUsersBalance(Bill bill, boolean split) {
+        double splitCost = (getCost() / listOfUsers.getSize());
+
+        for (int i = 0; i < listOfUsers.getSize(); i++) {
+            User userFromProdUsersList = listOfUsers.getUserFromList(i);
+            for (int i1 = 0; i1 < bill.getUsersList().getSize(); i1++) {
+                User userFromUsersList = bill.usersList.getUserFromList(i1);
+
+                if (userFromProdUsersList.getName().contains(userFromUsersList.getName())) {
+                    if (split) {
+                        userFromUsersList.addBalance(splitCost);
+                        System.out.println("Added split balance under: " + userFromUsersList.getName());
+                    } else {
+                        userFromUsersList.deductBalance(splitCost);
+                        System.out.println("Deducted split balance from: " + userFromUsersList.getName());
+
+                    }
+                }
+            }
         }
     }
+
+    //MODIFIES: bill.usersList
+    //EFFECTS: Deducts balance from all prod Users who are in the bill.usersList
+    public void deductBalanceFromUsers(Product prod, Bill bill) {
+        changeUsersBalance(bill, false);
+    }
+
 
     /*
      * EFFECTS: returns a string representation of the product
      */
+
     @Override
     public String toString() {
 

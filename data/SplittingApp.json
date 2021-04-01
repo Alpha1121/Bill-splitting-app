@@ -1,5 +1,5 @@
 {
-    "name": "Amoghs",
+    "name": "Split Bill",
     "bill": [
         {"UsersList": [
             {
@@ -11,8 +11,12 @@
                 "name": "Amogh"
             },
             {
+                "Balance Owed": 240,
+                "name": "Brad"
+            },
+            {
                 "Balance Owed": 100,
-                "name": "Matt"
+                "name": "Ritik"
             }
         ]},
         {"ProductsList": [
@@ -35,6 +39,19 @@
                 "listOfUsers": [
                     {"name": "Amogh"},
                     {"name": "Matt"}
+                ]
+            },
+            {
+                "cost": 140,
+                "name": "Juice",
+                "listOfUsers": [{"name": "Brad"}]
+            },
+            {
+                "cost": 200,
+                "name": "Wine",
+                "listOfUsers": [
+                    {"name": "Brad"},
+                    {"name": "Ritik"}
                 ]
             }
         ]}

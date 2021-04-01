@@ -65,6 +65,18 @@ public class UsersList {
         }
     }
 
+
+    //MODIFIES: UsersList bill.usersList
+    //EFFECTS: removes the User u from bill.usersList
+    public boolean removeUserFromList(User u) {
+        if (allUsers.contains(u)) {
+            allUsers.remove(u);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public int getSize() {
         return allUsers.size();
     }

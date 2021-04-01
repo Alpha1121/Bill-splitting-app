@@ -1,6 +1,7 @@
 package ui;
 
 import javax.swing.*;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class Main {
@@ -21,8 +22,8 @@ public class Main {
                     welcomePage.setVisible(true);
                 }
             });
-       // } catch (FileNotFoundException e) {
-       //     System.out.println("Unable to find file");
+//        } catch (FileNotFoundException e) {
+//            System.out.println("Unable to find file");
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         } catch (InstantiationException e) {

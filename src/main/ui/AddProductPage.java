@@ -107,7 +107,6 @@ public class AddProductPage extends JFrame {
                     }
                 }
 
-                System.out.println(selectedIndex1);
                 if (selectedIndex1 <= listModel1.getSize() && selectedIndex1 >= 0) {
                     listModel1.remove(selectedIndex1);
                 } else {
@@ -144,7 +143,7 @@ public class AddProductPage extends JFrame {
                         usersList2.removeUserFromList(i);
                     }
                 }
-                if (selectedIndex2 >= listModel2.getSize() && selectedIndex2 >= 0) {
+                if (selectedIndex2 >= 0) {
                     listModel2.remove(selectedIndex2);
                 } else {
                     JOptionPane.showMessageDialog(addProductPanel, "Please select user");
@@ -170,7 +169,7 @@ public class AddProductPage extends JFrame {
                         cost = Integer.parseInt(prodCost.getText());
                         Product p = new Product(prodName.getText(), cost, usersList2);
                         bill.getProductsList().addProductToList(p);
-                        p.split(p, bill);
+
                         JOptionPane.showMessageDialog(addProductPanel, "Product added to bill: " + p.getName());
 
                         AddProductPage addProductPage = new AddProductPage(bill);
@@ -184,7 +183,7 @@ public class AddProductPage extends JFrame {
         });
     }
 
-    //EFFECTS: Checks if character is a digit from 0-9 then return true, else false
+    //EFFECTS: Checks if character is a digit from 0-9 then returns true, else false
     private boolean isInteger(String str) {
         for (int i = 0; i < str.length(); i++) {
             if (str.charAt(i) >= '0'

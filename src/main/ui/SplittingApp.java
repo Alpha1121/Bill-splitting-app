@@ -224,7 +224,7 @@ public class SplittingApp {
         showItems();
         int i = in.nextInt();
         Product p = bill.getProductsList().getProduct(i - 1);
-        bill.getProductsList().removeProductFromList(p);
+        bill.getProductsList().removeProductFromList(p, bill);
         deduct(p);
         System.out.println("Removed product:" + p.getName() + "\nShared by: " + p.getProdUsers());
 
@@ -248,8 +248,11 @@ public class SplittingApp {
 
         System.out.println("Deducted owed balance of: ");
         for (int i = 0; i < prodUsers.getSize(); i++) {
-            prodUsers.getUserFromList(i).deductBalance(splitBalance);
+            User u = prodUsers.getUserFromList(i);
+            System.out.println("Old balance of " + u.getName() + " = " + u.getBalance());
+            u.deductBalance(splitBalance);
             System.out.println(i + ") " + prodUsers.getUserName(i));
+            System.out.println("New balance of " + u.getName() + " = " + u.getBalance());
         }
     }
 
@@ -259,7 +262,9 @@ public class SplittingApp {
         double splitBalance = (p.getCost() / bill.getUsersList().getSize());
         System.out.println("Deducting owed balance from ALL");
         for (int i = 0; i < bill.getUsersList().getSize(); i++) {
-            bill.getUsersList().getUserFromList(i).deductBalance(splitBalance);
+            User u = bill.getUsersList().getUserFromList(i);
+            u.deductBalance(splitBalance);
+            System.out.println("New balance of " + u.getName() + " = " + u.getBalance());
         }
         System.out.println("Done deducting from ALL.");
 

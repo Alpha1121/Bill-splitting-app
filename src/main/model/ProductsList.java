@@ -61,6 +61,16 @@ public class ProductsList {
         }
     }
 
+    public boolean removeProductFromList(Product prod, Bill bill) {
+        if (productList.contains(prod)) {
+            productList.remove(prod);
+            totalBalance -= prod.getCost();
+            prod.deductBalanceFromUsers(prod, bill);
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     public double getTotalBalance() {
         return totalBalance;

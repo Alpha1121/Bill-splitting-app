@@ -11,6 +11,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class MainMenuPage extends JFrame {
+    //JSON related variables
     private static final String JSON_STORE = "./data/SplittingApp.json";
     JsonWriter jsonWriter = new JsonWriter(JSON_STORE);
 
@@ -65,6 +66,7 @@ public class MainMenuPage extends JFrame {
                     jsonWriter.open();
                     jsonWriter.write(bill);
                     jsonWriter.close();
+                    JOptionPane.showMessageDialog(rootPanel1, "Saved Bill");
                 } catch (FileNotFoundException fileNotFoundException) {
                     JOptionPane.showMessageDialog(rootPanel1,"Error: File not Saved!");
                 }
@@ -77,7 +79,7 @@ public class MainMenuPage extends JFrame {
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int i = JOptionPane.showConfirmDialog(rootPanel1, "Changes won't be saved, Continue?");
+                int i = JOptionPane.showConfirmDialog(rootPanel1, "Unsaved Changes will be lost, Continue?");
                 if (i == 0) {
                     WelcomePage welcomePage = null;
                     try {

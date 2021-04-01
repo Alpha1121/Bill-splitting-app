@@ -1,8 +1,6 @@
 package ui;
 
-import model.Bill;
-import model.User;
-import model.UsersList;
+import model.*;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -15,12 +13,12 @@ public class UsersRelated extends JFrame {
     private JPanel usersPanel;
     private javax.swing.JLabel label1;
     private Bill bill;
-    private int selectedIndex;
-    private String selectedName;
 
     //List related declarations
     private JList<String> list1;
     private DefaultListModel<String> listModel = new DefaultListModel<String>();
+    private int selectedIndex;
+    private String selectedName;
 
     //Buttons
     private JButton addUserButton;
@@ -54,9 +52,7 @@ public class UsersRelated extends JFrame {
 
             listModel.addElement(user.getName() + "         " + user.getBalance());
         }
-
         list1.setModel(listModel);
-
     }
 
     private void addUserButtonPressed(Bill bill) {
@@ -89,25 +85,58 @@ public class UsersRelated extends JFrame {
         });
     }
 
+    //MODIFIES: bill.usersList
+    //EFFECTS: removes user from bill.usersList.
     private void removeUserButtonPressed(Bill bill) {
         removeUserButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                UsersList usersList = bill.getUsersList();
 
-                for (int i = 0; i < usersList.getSize(); i++) {
-                    User u = usersList.getUserFromList(i);
+                //iterates through bill.UsersList to find the selected User
+                for (int i = 0; i < bill.getUsersList().getSize(); i++) {
+                    User u = bill.getUsersList().getUserFromList(i);
 
+                    //Checks if th e iterator is rightly on the  selected name
                     if (selectedName.contains(u.getName())) {
-                        usersList.removeUserFromList(i);
+                        bill.removeUserFromBill(u);
+                        removeUserFromProdUsersList(bill, u);
                         JOptionPane.showMessageDialog(usersPanel, "User removed: " + u.getName());
                     }
                 }
 
-                listModel.remove(selectedIndex);
+                UsersRelated usersRelated = new UsersRelated(bill);
+                usersRelated.setVisible(true);
+                dispose();
+
             }
         });
 
+    }
+
+    private void removeUserFromProdUsersList(Bill bill, User u) {
+        ProductsList productsList = bill.getProductsList();
+
+        //iterates through bill.productsList to find the product which is used by the
+        for (int i1 = 0; i1 < productsList.getSize(); i1++) {
+            Product p = productsList.getProduct(i1);
+            System.out.println("Checking product:" + p.getName());
+            UsersList prodUsersList = p.getListOfUsers();
+
+            for (int i2 = 0; i2 < prodUsersList.getSize(); i2++) {
+
+                User prodUser = prodUsersList.getUserFromList(i2);
+                System.out.println("Checking User in list:" + prodUser.getName());
+
+                if (selectedName.contains(prodUser.getName())) {
+                    prodUsersList.removeUserFromList(prodUser);
+                    Product newProd = new Product(p.getName(),p.getCost(), prodUsersList);
+                    newProd.split(bill);
+
+                    productsList.removeProductFromList(p, bill);
+                    productsList.addProductToList(newProd);
+                }
+            }
+        }
     }
 
     private void backButtonPressed() {
