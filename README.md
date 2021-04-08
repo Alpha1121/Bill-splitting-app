@@ -21,6 +21,8 @@ and it was even more tedious to split the bill between us after one of us payed(
 This led me to the idea of building an app that splits the amount between users based on the products they specifically use.
 
 
-*Phase 4* :
+*Phase 4: Task 2* 
 - UsersList Class uses methods from ProductsList class to store information on which products the user is using,
  and the ProductsList Class uses methods from UsersList Class to store information on which product uses which users.
+ 
+*Phase 4: Task 3*

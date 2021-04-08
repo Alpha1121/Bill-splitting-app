@@ -6,7 +6,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Product {
+public class Product extends ProductsList {
 
     private String name;
     private double cost;
