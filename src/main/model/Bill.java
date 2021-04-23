@@ -17,6 +17,8 @@ public class Bill {
         productsList = new ProductsList();
     }
 
+    //MODIFIES: this
+    //EFFECTS: constructor with parameter of UsersList and ProductsList (FOR SPLITTING APP DEMO)
     public Bill(UsersList usersList, ProductsList productsList) {
         this.usersList = usersList;
         this.productsList = productsList;
@@ -54,7 +56,7 @@ public class Bill {
         productsList.addProductToList(p);
     }
 
-    //EFFECTS: returns a String representation of the bill
+    //EFFECTS: returns a String representation of the bill (FOR SPLITTING APP)
     public String toString() {
         String s1 = usersList.getAllUsers();
         String s2 = productsList.getAllProducts();
@@ -65,6 +67,7 @@ public class Bill {
     }
 
 
+    //EFFECTS: Saves the bill as a Json File.
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
         json.put("name", name);

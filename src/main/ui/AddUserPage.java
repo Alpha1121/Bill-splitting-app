@@ -36,6 +36,7 @@ public class AddUserPage extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String s = userNameTextField.getText();
 
+                //checks to see if the text field is empty, if it is, then displays a message dialog.
                 if (s.equals("")) {
                     JOptionPane.showMessageDialog(addUserPanel, "Please enter a name");
                 } else {

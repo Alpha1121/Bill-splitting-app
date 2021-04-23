@@ -40,7 +40,7 @@ public class User extends UsersList {
         }
     }
 
-    /* REQUIRES: balance >= 0
+    /* REQUIRES: balance >= amount and amount>=0
      *
      * MODIFIES this
      *
@@ -48,7 +48,11 @@ public class User extends UsersList {
      */
     public void deductBalance(double amount) {
         if (amount >= 0) {
-            this.balance -= amount;
+            if (balance >= amount) {
+                this.balance -= amount;
+            } else {
+                balance = 0;
+            }
         }
     }
 

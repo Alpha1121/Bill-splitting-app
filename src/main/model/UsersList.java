@@ -10,14 +10,17 @@ import java.util.List;
 public class UsersList {
     String name;
     List<User> allUsers;
+    ProductsList pl;
 
     public UsersList() {
         allUsers = new ArrayList<User>();
+        pl = new ProductsList();
     }
 
     public UsersList(String name) {
         this.name = name;
         allUsers = new ArrayList<User>();
+        pl = new ProductsList();
     }
 
     public void setName(String name) {
@@ -28,6 +31,14 @@ public class UsersList {
         return name;
     }
 
+    public void addProduct() {
+
+    }
+
+    // Returns the productslist
+    public ProductsList getProductsList() {
+        return pl;
+    }
 
     //MODIFIES this
     public void addUserToList(User u) {
@@ -35,7 +46,7 @@ public class UsersList {
     }
 
     //REQUIRES: ind >= 0
-    //EFFECTS: returns the User object according to the index entered in the parameter.
+    //EFFECTS: returns the User object from the allUsers List, according to the index entered in the parameter.
     public User getUserFromList(int ind) {
         if (ind >= 0) {
             return allUsers.get(ind);
@@ -55,7 +66,7 @@ public class UsersList {
     }
 
     //REQUIRES: ind >= 0
-    //EFFECTS: removes the User object according to the index entered in the parameter.
+    //EFFECTS: removes the User object from bill.usersList according to the index entered in the parameter.
     public boolean removeUserFromList(int ind) {
         if (allUsers.contains(allUsers.get(ind))) {
             allUsers.remove(allUsers.get(ind));

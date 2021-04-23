@@ -60,9 +60,8 @@ public class Product extends ProductsList {
 
     /*
      * MODIFIES: this
-     * EFFECTS:
-     *          adds the users of that specific product to the list of prodUsers
-     *          IF the product is used by ALL users then the list is EMPTY.
+     *
+     * EFFECTS: Adds the users of that specific product to the list of prodUsers
      */
     public boolean setListOfUsers(UsersList list) {
         for (User u : list.allUsers) {
@@ -73,8 +72,7 @@ public class Product extends ProductsList {
 
 
     /*
-     * EFFECTS:
-     *          returns the users of that specific product to the list of prodUsers
+     * EFFECTS: Returns the users of that specific product to the list of prodUsers
      *          IF the product is used by ALL users then the list is EMPTY, and null value is returned
      *
      */
@@ -87,8 +85,7 @@ public class Product extends ProductsList {
     }
 
     /*
-     * EFFECTS:
-     *          returns a string of all the users that use this product.
+     * EFFECTS: Returns a string of all the users that use this product.
      *          IF the product is used by ALL users then the string "ALL USERS" is returned.
      *
      */
@@ -106,12 +103,12 @@ public class Product extends ProductsList {
         return s;
     }
 
-    /*MODIFIES user.balance && product.users
+    /*
+     *MODIFIES: user.balance && product.users
      *EFFECT :
      *  makes a Integer List to store the serial numbers of Users entered by the USER
      *  accordingly adds those Users(using those serial numbers) to a list
      *  sends the list to Product.setProdUsers to set the Users using that product.
-     *
      */
     public void split(Bill bill) {
         changeUsersBalance(bill, true);

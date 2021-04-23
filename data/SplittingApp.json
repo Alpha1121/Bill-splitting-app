@@ -3,57 +3,21 @@
     "bill": [
         {"UsersList": [
             {
-                "Balance Owed": 150,
-                "name": "You"
-            },
-            {
-                "Balance Owed": 150,
+                "Balance Owed": 0,
                 "name": "Amogh"
             },
             {
-                "Balance Owed": 240,
-                "name": "Brad"
-            },
-            {
-                "Balance Owed": 100,
-                "name": "Ritik"
+                "Balance Owed": 0,
+                "name": "Lol"
             }
         ]},
-        {"ProductsList": [
-            {
-                "cost": 100,
-                "name": "Coffee",
-                "listOfUsers": [{"name": "You"}]
-            },
-            {
-                "cost": 100,
-                "name": "Milk",
-                "listOfUsers": [
-                    {"name": "You"},
-                    {"name": "Amogh"}
-                ]
-            },
-            {
-                "cost": 200,
-                "name": "Butter",
-                "listOfUsers": [
-                    {"name": "Amogh"},
-                    {"name": "Matt"}
-                ]
-            },
-            {
-                "cost": 140,
-                "name": "Juice",
-                "listOfUsers": [{"name": "Brad"}]
-            },
-            {
-                "cost": 200,
-                "name": "Wine",
-                "listOfUsers": [
-                    {"name": "Brad"},
-                    {"name": "Ritik"}
-                ]
-            }
-        ]}
+        {"ProductsList": [{
+            "cost": 10,
+            "name": "Coffee",
+            "listOfUsers": [
+                {"name": "Lol"},
+                {"name": "Amogh"}
+            ]
+        }]}
     ]
 }

@@ -47,7 +47,7 @@ public class BillPage extends JFrame {
 
     //EFFECTS: shows list of products
     private void showProducts(Bill bill) {
-        ProductsList productsList = bill.getProductsList();
+        ProductsList productsList = bill.getUsersList().getProductsList();
 
         for (int i = 0; i < productsList.getSize(); i++) {
             Product p = productsList.getProduct(i);
