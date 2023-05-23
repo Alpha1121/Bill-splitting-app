@@ -28,3 +28,4 @@ This led me to the idea of building an app that splits the amount between users 
 *Phase 4: Task 3*
 - Saved the file in the /data folder, under the named: CPSC 210 proj UML# UpdatedSplit-ItBackend
 # UpdatedSplit-ItBackend
+# UpdatedSplit-ItBackend
