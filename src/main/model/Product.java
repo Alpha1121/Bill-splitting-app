@@ -64,6 +64,9 @@ public class Product extends ProductsList {
      * EFFECTS: Adds the users of that specific product to the list of prodUsers
      */
     public boolean setListOfUsers(UsersList list) {
+        if (list == null) {
+            return false;
+        }
         for (User u : list.allUsers) {
             listOfUsers.addUserToList(u);
         }
@@ -76,7 +79,7 @@ public class Product extends ProductsList {
      *          IF the product is used by ALL users then the list is EMPTY, and null value is returned
      *
      */
-    public UsersList getListOfUsers() {
+    public UsersList getListOfProdUsers() {
         if (listOfUsers != null) {
             return listOfUsers;
         } else {
@@ -97,7 +100,7 @@ public class Product extends ProductsList {
                 s += " '" + u.getName() + "' ";
             }
         } else {
-            s = " All Users";
+            s = "All Users";
         }
 
         return s;
@@ -172,7 +175,7 @@ public class Product extends ProductsList {
                 json1.put("name", u.getName());
                 jsonArray.put(json1);
             }
-            json.put("listOfUsers",jsonArray);
+            json.put("Users",jsonArray);
         }
 
         return json;

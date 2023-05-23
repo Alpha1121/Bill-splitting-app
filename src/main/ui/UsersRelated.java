@@ -120,7 +120,7 @@ public class UsersRelated extends JFrame {
         for (int i1 = 0; i1 < productsList.getSize(); i1++) {
             Product p = productsList.getProduct(i1);
             System.out.println("Checking product:" + p.getName());
-            UsersList prodUsersList = p.getListOfUsers();
+            UsersList prodUsersList = p.getListOfProdUsers();
 
             for (int i2 = 0; i2 < prodUsersList.getSize(); i2++) {
 

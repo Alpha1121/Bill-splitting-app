@@ -49,7 +49,7 @@ public class ProductTest {
         assertTrue(p1.setListOfUsers(list1));
 
 
-        list2 = p1.getListOfUsers();
+        list2 = p1.getListOfProdUsers();
         u2 = list2.getUserFromList(0);
         assertEquals(u1,u2);
 

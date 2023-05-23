@@ -1,23 +1,34 @@
 {
-    "name": "Split Bill",
+    "name": "MAC",
     "bill": [
         {"UsersList": [
             {
-                "Balance Owed": 0,
+                "Balance Owed": 20,
+                "name": "You"
+            },
+            {
+                "Balance Owed": 30,
                 "name": "Amogh"
             },
             {
-                "Balance Owed": 0,
-                "name": "Lol"
+                "Balance Owed": 30,
+                "name": "Hgoma"
             }
         ]},
-        {"ProductsList": [{
-            "cost": 10,
-            "name": "Coffee",
-            "listOfUsers": [
-                {"name": "Lol"},
-                {"name": "Amogh"}
-            ]
-        }]}
+        {"ProductsList": [
+            {
+                "cost": 60,
+                "name": "milk",
+                "Users": "All Users"
+            },
+            {
+                "cost": 20,
+                "name": "momos",
+                "listOfUsers": [
+                    {"name": "Amogh"},
+                    {"name": "Hgoma"}
+                ]
+            }
+        ]}
     ]
 }

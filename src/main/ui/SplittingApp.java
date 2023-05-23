@@ -233,7 +233,7 @@ public class SplittingApp {
     //EFFECT checks if product is being shared by some users or all
     private void deduct(Product p) {
 
-        if (p.getListOfUsers().getSize() == 0) {
+        if (p.getListOfProdUsers().getSize() == 0) {
             deductFromAll(p);
         } else {
             deductFromSome(p);
@@ -243,7 +243,7 @@ public class SplittingApp {
     //MODIFIES User.balance
     //EFFECT deducts owed balance of the product only from Users sharing the specified product
     private void deductFromSome(Product p) {
-        UsersList prodUsers = p.getListOfUsers();
+        UsersList prodUsers = p.getListOfProdUsers();
         double splitBalance = (p.getCost() / prodUsers.getSize());
 
         System.out.println("Deducted owed balance of: ");

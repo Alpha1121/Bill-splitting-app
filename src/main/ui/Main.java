@@ -8,7 +8,7 @@ public class Main {
     public static void main(String[] args) {
 
         try {
-//            new SplittingApp();
+            // new SplittingApp();
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
             SwingUtilities.invokeLater(new Runnable() {
                 @Override
@@ -22,8 +22,6 @@ public class Main {
                     welcomePage.setVisible(true);
                 }
             });
-//        } catch (FileNotFoundException e) {
-//            System.out.println("Unable to find file");
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         } catch (InstantiationException e) {

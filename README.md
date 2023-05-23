@@ -26,4 +26,4 @@ This led me to the idea of building an app that splits the amount between users 
  and the ProductsList Class uses methods from UsersList Class to store information on which product uses which users.
  
 *Phase 4: Task 3*
-- Saved the file in the /data folder, under the named: CPSC 210 proj UML
+- Saved the file in the /data folder, under the named: CPSC 210 proj UML# UpdatedSplit-ItBackend

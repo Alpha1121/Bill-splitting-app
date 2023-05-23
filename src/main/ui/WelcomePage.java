@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 
 public class WelcomePage extends JFrame {
-    private static final String JSON_STORE = "./data/SplittingApp.json";
+    private static final String JSON_STORE = "/Users/amoghsinha/Developer/Bill-splitting-app/data";
     JsonReader j1 = new JsonReader(JSON_STORE);
     Bill bill = j1.readBill();
     private JPanel rootPanel;

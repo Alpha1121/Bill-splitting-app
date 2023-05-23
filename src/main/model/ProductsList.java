@@ -22,33 +22,43 @@ public class ProductsList {
         productList = new ArrayList<Product>();
     }
 
-    //EFFECT: Adds prod to the productList and also increases the totalBalance by the amount of the product
+    // EFFECT: Adds prod to the productList and also increases the totalBalance by
+    // the amount of the product
     public void addProductToList(Product prod) {
-        addUserToList(prod);
+        addProdUserToList(prod);
 
         productList.add(prod);
         totalBalance += prod.getCost();
     }
 
-    //MODIFIES: This
-    //EFFECT: adds users to usersList.
-    private void addUserToList(Product p) {
+    // MODIFIES: This
+    // EFFECT: adds users to usersList.
+    private void addProdUserToList(Product p) {
         boolean exists = false;
-        for (int i = 0; i < p.getListOfUsers().getSize(); i++) {
-            User u = p.getListOfUsers().getUserFromList(i);
-
-            for (int j = 0; j < usersList.getSize(); j++) {
-                User u1 = usersList.getUserFromList(j);
-                if (u.equals(u1)) {
-                    exists = true;
+        System.out.println("Adding users to prodUserList");
+        if (p.getListOfProdUsers() != null) {
+            for (int i = 0; i < p.getListOfProdUsers().getSize(); i++) {
+                User u = p.getListOfProdUsers().getUserFromList(i);
+                if (usersList == null) {
+                    break;
+                } else {
+                    for (int j = 0; j < usersList.getSize(); j++) {
+                        System.out.println("reached here for " + p.getName());
+                        User u1 = usersList.getUserFromList(j);
+                        if (u.equals(u1)) {
+                            exists = true;
+                        }
+                    }
+                    if (!exists) {
+                        usersList.addUserToList(u);
+                    }
                 }
             }
-            if (!exists) {
-                usersList.addUserToList(u);
-            }
+        } else {
+            System.out.println("No users to add");
         }
-    }
 
+    }
 
     public void setName(String name) {
         this.name = name;
@@ -61,7 +71,6 @@ public class ProductsList {
     public int getSize() {
         return productList.size();
     }
-
 
     public Product getProduct(int ind) {
         return productList.get(ind);
@@ -82,7 +91,6 @@ public class ProductsList {
         }
     }
 
-
     public boolean removeProductFromList(Product prod, Bill bill) {
         if (productList.contains(prod)) {
             productList.remove(prod);
@@ -99,7 +107,8 @@ public class ProductsList {
     }
 
     /*
-     * EFFECTS: returns a string representation of all the products in the ProductsList
+     * EFFECTS: returns a string representation of all the products in the
+     * ProductsList
      */
 
     public String getAllProducts() {
@@ -116,10 +125,6 @@ public class ProductsList {
 
         return s;
     }
-
-
-
-
 
     public JSONObject toJson() {
         JSONObject jsonObject = new JSONObject();
